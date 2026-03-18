@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Brother!</title>
+    <!-- Importing Google Fonts for modern typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- CSS STYLES --- */
+        :root {
+            --primary-color: #ff6b6b;
+            --secondary-color: #556270;
+            --bg-gradient: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+            --card-bg: rgba(255, 255, 255, 0.85);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(45deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Floating Balloons Animation */
+        .balloon {
+            position: absolute;
+            bottom: -100px;
+            width: 50px;
+            height: 60px;
+            background-color: #ff6b6b;
+            border-radius: 50%;
+            opacity: 0.8;
+            animation: floatUp 10s linear infinite;
+            z-index: 1;
+        }
+
+        .balloon::before {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 40px;
+            background-color: rgba(0,0,0,0.2);
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0.8; }
+            100% { transform: translateY(-120vh) rotate(20deg); opacity: 0; }
+        }
+
+        /* Main Card Container */
+        .container {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+            max-width: 600px;
+            width: 90%;
+            z-index: 10;
+            position: relative;
+            border: 1px solid rgba(255,255,255,0.5);
+            transition: transform 0.3s ease;
+        }
+
+        .container:hover {
+            transform: translateY(-5px);
+        }
+
+        h1 {
+            font-family: 'Pacifico', cursive;
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            color: var(--secondary-color);
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .cake-img {
+            width: 200px;
+            height: auto;
+            margin: 20px auto;
+            display: block;
+            animation: bounce 2s infinite;
+            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.2));
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .message {
+            color: #555;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+            border: none;
+            padding: 12px 30px;
+            color: white;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(255, 107, 107, 0.6);
+        }
+
+        .btn:active {
+            transform: scale(0.95);
+        }
+
+        .hidden-message {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 10px;
+            color: #ff6b6b;
+            font-weight: bold;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        footer {
+            margin-top: 30px;
+            font-size: 0.9rem;
+            color: #888;
+        }
+
+        /* Confetti Canvas */
+        #confetti-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 99;
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 480px) {
+            h1 { font-size: 2rem; }
+            h2 { font-size: 1.4rem; }
+            .container { padding: 25px; width: 95%; }
+            .cake-img { width: 150px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Canvas for Confetti Effect -->
+    <canvas id="confetti-canvas"></canvas>
+
+    <!-- Floating Balloons (Generated via JS or static) -->
+    <div class="balloon" style="left: 10%; animation-duration: 8s; background: #ff9a9e;"></div>
+    <div class="balloon" style="left: 20%; animation-duration: 12s; background: #a18cd1;"></div>
+    <div class="balloon" style="left: 70%; animation-duration: 9s; background: #fbc2eb;"></div>
+    <div class="balloon" style="left: 85%; animation-duration: 11s; background: #8fd3f4;"></div>
+
+    <div class="container">
+        <h1>Happy Birthday to My Big Brother</h1>
+        
+        <!-- Replace 'Brother' with actual name if desired -->
+        <h2>VIKASH KUMAR</h2>
+
+        <!-- Birthday Cake Image (Using a reliable external source) -->
+        <img src="https://cdn-icons-png.flaticon.com/512/2673/2673514.png" alt="Birthday Cake" class="cake-img">
+
+        <p class="message">
+            "Thank you for always guiding and supporting me."
+        </p>
+
+        <button class="btn" onclick="celebrate()">Click for Surprise 🎉</button>
+
+        <div id="surpriseMsg" class="hidden-message">
+            🎁 Here is a virtual hug! Have an amazing year ahead! 🎁
+        </div>
+
+        <footer>
+            Made with ❤️ by your little brother.
+        </footer>
+    </div>
+
+    <script>
+        /* --- JAVASCRIPT LOGIC --- */
+
+        // 1. Confetti Logic
+        const canvas = document.getElementById('confetti-canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        let confetti = [];
+        const colors = ['#ff6b6b', '#feca57', '#48dbfb', '#ff9ff3', '#54a0ff'];
+
+        function createConfettiPiece() {
+            return {
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height - canvas.height, // Start above screen
+                w: Math.random() * 10 + 5,
+                h: Math.random() * 10 + 5,
+                color: colors[Math.floor(Math.random() * colors.length)],
+                speed: Math.random() * 3 + 2,
+                angle: Math.random() * 360,
+                spin: Math.random() * 5 - 2.5
+            };
+        }
+
+        function drawConfetti() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            confetti.forEach((p, index) => {
+                ctx.fillStyle = p.color;
+                ctx.save();
+                ctx.translate(p.x, p.y);
+                ctx.rotate(p.angle * Math.PI / 180);
+                ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+                ctx.restore();
+
+                p.y += p.speed;
+                p.angle += p.spin;
+
+                // Reset if it falls off screen
+                if (p.y > canvas.height) {
+                    confetti[index] = createConfettiPiece();
+                }
+            });
+            requestAnimationFrame(drawConfetti);
+        }
+
+        // Start animation loop
+        drawConfetti();
+
+        // 2. Button Interaction
+        function celebrate() {
+            // Trigger massive confetti burst
+            for(let i=0; i<100; i++) {
+                confetti.push(createConfettiPiece());
+            }
+
+            // Show hidden message
+            const msg = document.getElementById('surpriseMsg');
+            msg.style.display = 'block';
+
+            // Change button text
+            const btn = document.querySelector('.btn');
+            btn.textContent = "Enjoy your day! 🎂";
+            btn.style.background = "#48dbfb";
+        }
+
+        // Handle window resize for canvas
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+    </script>
+</body>
+</html>
